@@ -2,8 +2,8 @@ import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ArrowUpRight01Icon } from 'hugeicons-react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/modal";
-import StarBorder from './StarBorder';
 import { Input } from '@heroui/input';
+import { useLocation } from 'react-router-dom';
 
 const CardNav = ({
   logo,
@@ -21,6 +21,7 @@ const CardNav = ({
   const navRef = useRef(null);
   const cardsRef = useRef([]);
   const tlRef = useRef(null);
+  const location = useLocation();
 
   const calculateHeight = () => {
     const navEl = navRef.current;
@@ -151,6 +152,17 @@ const CardNav = ({
     };
   }, [isExpanded]);
 
+  useEffect(() => {
+    setIsHamburgerOpen(false);
+    setIsExpanded(false);
+    
+    if (tlRef.current) {
+      gsap.set(navRef.current, { height: 60 });
+      tlRef.current.kill();
+      tlRef.current = createTimeline();
+    }
+  }, [location.pathname]);
+
 
   const setCardRef = i => el => {
     if (el) cardsRef.current[i] = el;
@@ -205,7 +217,7 @@ const CardNav = ({
             } md:flex-row md:items-end md:gap-[12px]`}
           aria-hidden={!isExpanded}
         >
-          {(items || []).slice(0, 4).map((item, idx) => (
+          {(items || []).slice(0, 5).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
               className="nav-card select-none  relative flex flex-col gap-2 p-[12px_16px] rounded-[calc(0.75rem-0.2rem)] min-w-0 flex-[1_1_auto] h-auto min-h-[60px] md:h-full md:min-h-0 md:flex-[1_1_0%]"

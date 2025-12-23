@@ -1,26 +1,49 @@
 // tailwind.config.js
-const { heroui } = require("@heroui/theme");
+import heroui from "@heroui/react";
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  //   content: [
-  //     "./node_modules/@heroui/theme/dist/components/(input|modal|form).js"
-  // ],
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+export const content = [
+  "./index.html",
+  "./src/**/*.{js,ts,jsx,tsx}",
 
-    // HeroUI (IMPORTANT)
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        roboto: ['Roboto', 'system-ui', 'sans-serif'],
-      },
+  "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+];
+export const theme = {
+  extend: {
+    fontFamily: {
+      roboto: ['Roboto', 'system-ui', 'sans-serif'],
     },
   },
-
-  darkMode: "class",
-  plugins: [heroui()],
 };
+
+export const darkMode = "class"
+export const plugins = [
+  heroui({
+    themes: {
+      light: {
+        colors: {
+          primary: {
+            DEFAULT: "#F57121",
+            "50": "#fff6ed",
+            "100": "#feecd6",
+            "200": "#fcd4ac",
+            "300": "#fab677",
+            "400": "#f78c40",
+            "500": "#f57121",
+            "600": "#e65210",
+            "700": "#bf3c0f",
+            "800": "#973115",
+            "900": "#7a2b14",
+            "950": "#421308",
+          },
+          secondary: {
+            DEFAULT: "#2A2A86",
+          },
+        },
+      },
+    },
+  }),
+  require("postcss-import"),
+  require("tailwindcss"),
+  require("autoprefixer"),
+];

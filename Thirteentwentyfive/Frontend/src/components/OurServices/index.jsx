@@ -1,7 +1,7 @@
 import React from "react";
 import { AiProgrammingIcon, ArtificialIntelligence04Icon, CloudIcon, MobileProgramming01Icon } from "hugeicons-react";
 
-export default function Services() {
+export default function OurServices() {
   const services = [
     {
       id: 1,

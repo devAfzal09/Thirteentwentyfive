@@ -1,6 +1,6 @@
 import Navbar from '../../components/Navbar'
 import HeroSection from '../../components/HeroSection'
-import Services from '../../components/Services'
+import Services from '../../components/OurServices'
 import Ai from '../../components/Ai'
 import ToolsTechnology from '../../components/Tools&Technology'
 import Projects from '../../components/Projects'

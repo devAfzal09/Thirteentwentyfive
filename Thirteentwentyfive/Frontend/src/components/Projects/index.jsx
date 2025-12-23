@@ -10,11 +10,13 @@ import "swiper/css/effect-coverflow";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
+import { useNavigate } from "react-router-dom";
 
 export default function Projects() {
 
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const navigate = useNavigate();
 
     const projectData = [
         {
@@ -173,18 +175,18 @@ export default function Projects() {
                                 ))}
                             </div>
 
-                            <a
-                                href="#"
+                            <button
+                             onClick={() => navigate('/projects')}                                
                                 className="
                                     my-4 inline-block w-max
                                     text-sm uppercase tracking-wide
                                     text-teal-600
                                     hover:text-teal-500
-                                    py-2 px-4 bg-teal-200 rounded-lg
+                                    py-2 px-4 bg-teal-200 rounded-lg cursor-pointer
                                 "
                             >
                                 Explore
-                            </a>
+                            </button>
                         </div>
                     </SwiperSlide>
                 ))}
