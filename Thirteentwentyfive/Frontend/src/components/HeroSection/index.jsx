@@ -3,16 +3,7 @@ import Iridescence from '../../ReactbitzComponent/Iridescence'
 import SplitText from '../../ReactbitzComponent/SplitText'
 
 export default function HeroSection() {
-   const [heroData, setHeroData] = useState(null)
-
-   useEffect(() => {
-    fetch("http://localhost:5000/api/home/hero")
-      .then(res => res.json())
-      .then(data => setHeroData(data))
-      .catch(err => console.error(err))
-  }, [])
-
-  if (!heroData) return null;
+   
   return (
     <div className="relative h-screen w-full overflow-hidden">
 
@@ -29,7 +20,7 @@ export default function HeroSection() {
       {/* Hero Content */}
       <div className="w-full h-full flex flex-col items-center justify-end text-center py-15">
         <SplitText
-          text={heroData.title}
+          text={"Empowering Your Vision with Scalable AI, Web Development, and App Development"}
           className="text-4xl md:text-6xl font-semibold text-center px-4"
           delay={50}
           duration={0.3}
@@ -43,7 +34,7 @@ export default function HeroSection() {
         />
 
         <p className="text-gray-600 text-lg md:text-xl mt-6 max-w-3xl">
-          {heroData.description}
+          We blend AI, software engineering, and automation with real industry insight to deliver scalable, future-ready solutions while partnering with you for long-term success.
         </p>
 
       </div>
