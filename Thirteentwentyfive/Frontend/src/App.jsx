@@ -1,35 +1,16 @@
-import Navbar from './pages/Navbar'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home'
-import Services from './pages/Services/Services'
-import Ai from './pages/Ai'
-import ToolsTechnology from './pages/Tools&Technology'
-import Projects from './pages/Projects';
-import Achievement from './pages/Achievement'
-import Testimonials from './pages/Testimonials'
-import Contact from './pages/Contact'
-import Accordion from './ReactbitzComponent/Accordion'
-import Loop from './pages/Loop'
-import WhyChooseUs from './pages/ChooesUs'
-
-
+import About from "./pages/About";
 
 function App() {
 
   return (
-    <>
-          <Navbar />
-          <Home />
-          <Services />
-          <Ai />
-          <Projects />
-          <Achievement />
-          <Testimonials />
-          <Accordion />          
-          <Loop />
-          <ToolsTechnology />
-          <WhyChooseUs />
-          <Contact />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

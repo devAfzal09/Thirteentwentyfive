@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import CardNav from '../../ReactbitzComponent/CardNav';
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
   const items = [
     {
       label: "About",
       bgColor: "linear-gradient(135deg, #9CC6DB 0%, #F2AEBB 50%, #FFFFFF 100%)",
       textColor: "#171414ff",
+      
       links: [
-        { label: "Company", ariaLabel: "About Company" },
+        { label: "Company", ariaLabel: "About Company", onClick: () => navigate("/about") },
         { label: "Careers", ariaLabel: "About Careers" }
       ]
     },

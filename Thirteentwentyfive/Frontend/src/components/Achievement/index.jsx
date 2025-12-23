@@ -30,24 +30,24 @@ export default function Achievement() {
   }, []);
 
   return (
-    <div ref={ref} className="w-full py-8 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 
-                        bg-gray-50/80 backdrop-blur-sm rounded-3xl border border-gray-200/50 
+    <div ref={ref} className="w-full py-20">
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 
+                        bg-gray-50/80 backdrop-blur-sm border border-gray-200/50 
                         shadow-xl p-10 md:p-14 text-center">
 
-          {achievements.map((item, index) => (
-            <CounterItem
-              key={index}
-              target={item.number}
-              prefix={item.prefix || ""}
-              suffix={item.suffix || ""}
-              label={item.label}
-              inView={inView}
-            />
-          ))}
-        </div>
+        {achievements.map((item, index) => (
+          <CounterItem
+            key={index}
+            target={item.number}
+            prefix={item.prefix || ""}
+            suffix={item.suffix || ""}
+            label={item.label}
+            inView={inView}
+          />
+        ))}
       </div>
+
     </div>
   );
 }
@@ -81,7 +81,7 @@ function CounterItem({ target, prefix = "", suffix = "", label, inView }) {
   }, [inView, target, totalFrames]);
 
   return (
-    <div className="group">
+    <div className="group w-full">
       <h3 className="text-xl md:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight
                      group-hover:scale-110 transition-transform duration-300">
         {prefix}

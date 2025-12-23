@@ -1,53 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import Iridescence from '../../ReactbitzComponent/Iridescence'
-import SplitText from '../../ReactbitzComponent/SplitText'
+import Navbar from '../../components/Navbar'
+import HeroSection from '../../components/HeroSection'
+import Services from '../../components/Services'
+import Ai from '../../components/Ai'
+import ToolsTechnology from '../../components/Tools&Technology'
+import Projects from '../../components/Projects'
+import Achievement from '../../components/Achievement'
+import Testimonials from '../../components/Testimonials'
+// import Contact from './components/Contact'
+import Accordion from '../../ReactbitzComponent/Accordion'
+import Loop from '../../components/Loop'
+import WhyChooseUs from '../../components/ChooesUs/index.jsx'
+import React from 'react'
+import AboutUs from '../../components/AboutUs'
 
 export default function Home() {
-   const [heroData, setHeroData] = useState(null)
-
-   useEffect(() => {
-    fetch("http://localhost:5000/api/home/hero")
-      .then(res => res.json())
-      .then(data => setHeroData(data))
-      .catch(err => console.error(err))
-  }, [])
-
-  if (!heroData) return null;
   return (
-    <div className="relative h-screen w-full overflow-hidden">
-
-      {/* Aurora Background */}
-      <div className="absolute inset-0 -z-10">
-        <Iridescence
-          color={[1, 1, 1]}
-          mouseReact={false}
-          amplitude={0.1}
-          speed={1.0}
-        />
+    <>
+      <Navbar />
+      <HeroSection />
+      <Ai />
+      <Services />
+      <Projects />
+      <Achievement />
+      <Testimonials />
+      <Accordion />
+      <Loop />
+      <ToolsTechnology />
+      <WhyChooseUs />
+      {/* <Contact /> */}
+      <div className="px-15">
+        <AboutUs />
       </div>
-
-      {/* Hero Content */}
-      <div className="w-full h-full flex flex-col items-center justify-end text-center py-15">
-        <SplitText
-          text={heroData.title}
-          className="text-4xl md:text-6xl font-semibold text-center px-4"
-          delay={50}
-          duration={0.3}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 40 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-100px"
-          textAlign="center"
-        />
-
-        <p className="text-gray-600 text-lg md:text-xl mt-6 max-w-3xl">
-          {heroData.description}
-        </p>
-
-      </div>
-
-    </div>
+    </>
   )
 }

@@ -1,9 +1,9 @@
 import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ArrowUpRight01Icon } from 'hugeicons-react';
-// use your own icon import if react-icons is not available
-// import { GoArrowUpRight } from 'react-icons/go';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/modal";
 import StarBorder from './StarBorder';
+import { Input } from '@heroui/input';
 
 const CardNav = ({
   logo,
@@ -21,8 +21,6 @@ const CardNav = ({
   const navRef = useRef(null);
   const cardsRef = useRef([]);
   const tlRef = useRef(null);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const calculateHeight = () => {
     const navEl = navRef.current;
@@ -158,6 +156,8 @@ const CardNav = ({
     if (el) cardsRef.current[i] = el;
   };
 
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <div
       className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[1800px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
@@ -169,7 +169,7 @@ const CardNav = ({
       >
         <div className="card-nav-top  absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
           <div
-            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full bg-white/20 flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
+            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
             onClick={toggleMenu}
             role="button"
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}
@@ -190,17 +190,15 @@ const CardNav = ({
             <img src={logo} alt={logoAlt} className="logo h-[28px]" />
           </div>
 
-          <StarBorder
-            as="button"
-            onClick={() => setIsModalOpen(true)}
-            className="custom-class card-nav-cta-button hidden md:inline-flex border-0 px-4 items-center h-full font-medium cursor-pointer transition-colors duration-300"
-            color="cyan"
-            speed="5s"
+          <button
+            type="button"
+            onClick={onOpen}
+            className="card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-colors duration-300"
+            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
           >
-            Get Started
-          </StarBorder>
+            Let's Talk
+          </button>
         </div>
-
         {/* // */}
         <div
           className={`card-nav-content absolute left-0 right-0 top-[60px] bottom-0 p-2 flex flex-col items-stretch gap-2 justify-start z-[1] ${isExpanded ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
@@ -220,6 +218,11 @@ const CardNav = ({
               <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
                 {item.links?.map((lnk, i) => (
                   <a
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      lnk.onClick?.();
+                    }}
                     key={`${lnk.label}-${i}`}
                     className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
                     href={lnk.href}
@@ -234,66 +237,75 @@ const CardNav = ({
           ))}
         </div>
       </nav>
-      {isModalOpen && (
-        <div className="fixed mt-100 inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[999] px-4">
-          <div className="bg-white rounded-xl p-6 w-[90%] max-w-lg shadow-xl relative">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        size="lg"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <div className="bg-white rounded-xl p-6 w-[90%] max-w-lg shadow-xl relative">
 
-            {/* Modal Title */}
-            <h2 className="text-xl font-semibold mb-4">Get Started</h2>
+              {/* Modal Title */}
+              <h2 className="text-xl font-semibold mb-4">
+                Get Started
+              </h2>
 
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="text-sm font-medium">First Name</label>
+              {/* Name Fields */}
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                  <Input label="Email" type="email" />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium">Last Name</label>
+                  <input
+                    type="text"
+                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
+                  />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="mb-4">
+                <label className="text-sm font-medium">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Last Name</label>
+
+              {/* Mobile */}
+              <div className="mb-6">
+                <label className="text-sm font-medium">Mobile Number</label>
                 <input
-                  type="text"
+                  type="tel"
                   className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
                 />
               </div>
-            </div>
 
-            {/* Second Row: Email */}
-            <div className="mb-4">
-              <label className="text-sm font-medium">Email</label>
-              <input
-                type="email"
-                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
-              />
-            </div>
+              {/* Buttons */}
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={onClose}
+                  className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+                >
+                  Close
+                </button>
 
-            {/* Third Row: Mobile Number */}
-            <div className="mb-6">
-              <label className="text-sm font-medium">Mobile Number</label>
-              <input
-                type="tel"
-                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
-              />
-            </div>
+                <button
+                  className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+                >
+                  Submit
+                </button>
+              </div>
 
-            {/* Buttons */}
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
-              >
-                Close
-              </button>
-
-              <button
-                className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
-              >
-                Submit
-              </button>
             </div>
-          </div>
-        </div>
-      )}
+          )}
+        </ModalContent>
+      </Modal>
+
 
 
     </div>

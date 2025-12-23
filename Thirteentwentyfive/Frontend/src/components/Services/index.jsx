@@ -38,41 +38,24 @@ export default function Services() {
   ];
 
   return (
-    <div className="w-full py-20 mb-5">
+    <div className="w-full py-20 mb-5 bg-[#D8EFFF]">
       <div className="max-w-6xl mx-auto px-5">
 
-        <h2 className="text-4xl font-bold text-center mb-8">Our Services</h2>
-
-        {/* <AnimatedContent
-          distance={150}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="easeout"
-          initialOpacity={0.2}
-          animateOpacity
-          scale={1.1}
-          threshold={0.2}
-          delay={0.3}
-        > */}
+        <h2 className="text-4xl font-bold text-center mb-12">Our Services</h2>        
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((item) => (
               <div
                 key={item.id}
-                style={{ backgroundColor: item.bg }}
-                className={` shadow-lg hover:shadow-xl transition rounded-2xl p-6 flex flex-col items-center text-center`}
-              >
-                {/* Icon */}
+                // style={{ backgroundColor: item.bg }}
+                className={`shadow-[0_10px_40px_rgba(0,0,0,0.20)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.30)] transition rounded-2xl p-6 flex flex-col items-center text-center`}
+              >                
                 <div className="mb-4">{item.icon}</div>
-
-                {/* Title */}
+                
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-
-                {/* Description */}
+                
                 <p className="text-gray-600 text-sm mb-4">{item.description}</p>
-
-                {/* Tag */}
-                <span className="px-4 py-1 text-sm rounded-full shadow-md bg-gray-50">
+                
+                <span className="mt-auto px-4 py-1 text-sm rounded-full shadow-md bg-gray-50">
                   {item.tag}
                 </span>
               </div>
