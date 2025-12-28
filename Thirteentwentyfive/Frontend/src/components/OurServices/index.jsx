@@ -9,7 +9,7 @@ export default function OurServices() {
       description: "We create intelligent AI-driven systems that automate processes and scale your business.",
       icon: <ArtificialIntelligence04Icon className="w-12 h-12 text-blue-500" />,
       tag: "AI & ML",
-      bg: "bg-[linear-gradient(120deg,#eff6ff,#dbeafe,#ecfeff,#e9d5ff)]"  
+      bg: "bg-[linear-gradient(120deg,#e9d5ff,#dbeafe,#ecfeff,#e9d5ff)]"  
     },
     {
       id: 2,
