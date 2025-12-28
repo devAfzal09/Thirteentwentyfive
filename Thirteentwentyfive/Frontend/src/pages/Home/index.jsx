@@ -12,6 +12,7 @@ import Loop from '../../components/Loop'
 import WhyChooseUs from '../../components/ChooesUs/index.jsx'
 import React from 'react'
 import AboutUs from '../../components/AboutUs'
+import ContactUs from '../../components/ContactUs'
 
 export default function Home() {
   return (
@@ -27,9 +28,12 @@ export default function Home() {
       <Loop />
       <ToolsTechnology />
       <WhyChooseUs />
-      {/* <Contact /> */}
+      {/*  */}
       <div className="px-15">
         <AboutUs />
+      </div>
+       <div className="">
+        <ContactUs />
       </div>
     </>
   )

@@ -56,13 +56,13 @@ export default function Index() {
                                 rotationInterval={3000}
                             />
                         </div>
-                        <div className="flex flex-wrap items-center justify-center mt-8 gap-x-2 text-center mx-auto w-[75%]">
+                        <div className="flex flex-wrap items-center justify-center mt-8 gap-x-2 gap-y-2 text-center mx-auto w-full sm:w-[90%] md:w-[80%] lg:w-[75%]">
                             <BlurText
                                 text="We"
                                 delay={150}
                                 animateBy="words"
                                 direction="top"
-                                className="text-[#8CE4FF] text-2xl md:text-3xl font-medium"
+                                className="text-[#8CE4FF] text-xl sm:text-2xl md:text-3xl font-medium"
                             />
 
                             <BlurText
@@ -70,7 +70,7 @@ export default function Index() {
                                 delay={180}
                                 animateBy="words"
                                 direction="top"
-                                className="text-gray-500 text-2xl md:text-3xl font-medium"
+                                className="text-gray-500 text-xl sm:text-2xl md:text-3xl font-medium"
                             />
 
                             <BlurText
@@ -78,7 +78,7 @@ export default function Index() {
                                 delay={210}
                                 animateBy="words"
                                 direction="top"
-                                className="text-[#8CE4FF] text-2xl md:text-3xl font-medium"
+                                className="text-[#8CE4FF] text-xl sm:text-2xl md:text-3xl font-medium"
                             />
 
                             <BlurText
@@ -86,7 +86,7 @@ export default function Index() {
                                 delay={240}
                                 animateBy="words"
                                 direction="top"
-                                className="text-gray-500 font-semibold text-2xl md:text-3xl"
+                                className="text-gray-500 font-semibold text-xl sm:text-2xl md:text-3xl"
                             />
 
                             <BlurText
@@ -94,7 +94,7 @@ export default function Index() {
                                 delay={270}
                                 animateBy="words"
                                 direction="top"
-                                className="text-[#8CE4FF] text-2xl md:text-3xl font-medium"
+                                className="text-[#8CE4FF] text-xl sm:text-2xl md:text-3xl font-medium"
                             />
 
                             <BlurText
@@ -102,7 +102,7 @@ export default function Index() {
                                 delay={300}
                                 animateBy="words"
                                 direction="top"
-                                className="text-gray-500 font-semibold text-2xl md:text-3xl"
+                                className="text-gray-500 font-semibold text-xl sm:text-2xl md:text-3xl"
                             />
 
                             <BlurText
@@ -110,7 +110,7 @@ export default function Index() {
                                 delay={330}
                                 animateBy="words"
                                 direction="top"
-                                className="text-[#8CE4FF] font-semibold text-2xl md:text-3xl"
+                                className="text-[#8CE4FF] font-semibold text-xl sm:text-2xl md:text-3xl"
                             />
 
                             <BlurText
@@ -118,9 +118,10 @@ export default function Index() {
                                 delay={360}
                                 animateBy="words"
                                 direction="top"
-                                className="text-gray-500 font-semibold text-2xl md:text-3xl"
+                                className="text-gray-500 font-semibold text-xl sm:text-2xl md:text-3xl"
                             />
                         </div>
+
                     </div>
                 </div>
             </div>

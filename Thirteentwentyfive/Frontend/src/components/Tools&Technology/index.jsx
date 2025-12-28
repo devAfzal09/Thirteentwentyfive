@@ -150,11 +150,7 @@ export default function ToolsTechnology() {
               </div>
             </div>
           </TabsContent>
-
         </TabsContents>
-
-
-
       </Tabs>
     </div>
   )

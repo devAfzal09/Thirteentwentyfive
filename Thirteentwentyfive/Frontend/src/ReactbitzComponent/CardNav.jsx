@@ -1,9 +1,9 @@
 import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ArrowUpRight01Icon } from 'hugeicons-react';
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/modal";
-import { Input } from '@heroui/input';
 import { useLocation } from 'react-router-dom';
+import { Button, Input, Modal, ModalContent, useDisclosure } from '@heroui/react';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../components/animate-ui/components/radix/dialog';
 
 const CardNav = ({
   logo,
@@ -22,6 +22,7 @@ const CardNav = ({
   const cardsRef = useRef([]);
   const tlRef = useRef(null);
   const location = useLocation();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const calculateHeight = () => {
     const navEl = navRef.current;
@@ -155,13 +156,33 @@ const CardNav = ({
   useEffect(() => {
     setIsHamburgerOpen(false);
     setIsExpanded(false);
-    
+
     if (tlRef.current) {
       gsap.set(navRef.current, { height: 60 });
       tlRef.current.kill();
       tlRef.current = createTimeline();
     }
   }, [location.pathname]);
+
+  const handleLinkClick = (callback) => {
+    if (!tlRef.current) {
+      callback?.();
+      return;
+    }
+
+    // Collapse nav first
+    if (isExpanded) {
+      setIsHamburgerOpen(false);
+      tlRef.current.eventCallback('onReverseComplete', () => {
+        setIsExpanded(false);
+        callback?.(); // navigate after animation
+      });
+      tlRef.current.reverse();
+    } else {
+      callback?.(); // fallback
+    }
+  };
+
 
 
   const setCardRef = i => el => {
@@ -202,16 +223,100 @@ const CardNav = ({
             <img src={logo} alt={logoAlt} className="logo h-[28px]" />
           </div>
 
-          <button
-            type="button"
-            onClick={onOpen}
-            className="card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-colors duration-300"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-          >
-            Let's Talk
-          </button>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                className="card-nav-cta-button hidden md:inline-flex items-center h-full px-5 rounded-[calc(0.75rem-0.2rem)] font-medium transition-all duration-300 hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+              >
+                Let's Talk
+              </button>
+            </DialogTrigger>
+
+            <DialogContent className="w-[92%] max-w-lg rounded-2xl bg-white p-6 shadow-xl">
+              <DialogHeader className="mb-4">
+                <DialogTitle className="text-xl font-semibold text-gray-900">
+                  Get in Touch
+                </DialogTitle>
+                <DialogDescription className="text-sm text-gray-500">
+                  We’d love to hear from you. Fill out the form below.
+                </DialogDescription>
+              </DialogHeader>
+
+              {/* Form */}
+              <form className="space-y-4">
+                {/* Name */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-sm font-medium text-gray-700">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="John"
+                      className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-gray-700">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Doe"
+                      className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="text-sm font-medium text-gray-700">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="john@example.com"
+                    className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
+                  />
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="text-sm font-medium text-gray-700">
+                    Message
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Tell us about your project..."
+                    className="mt-1 w-full resize-none rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
+                  />
+                </div>
+
+                {/* Footer Buttons */}
+                <DialogFooter className="flex justify-end gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsDialogOpen(false)}
+                    className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 transition cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition cursor-pointer"
+                  >
+                    Send Message
+                  </button>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </Dialog>
+
         </div>
-        {/* // */}
         <div
           className={`card-nav-content absolute left-0 right-0 top-[60px] bottom-0 p-2 flex flex-col items-stretch gap-2 justify-start z-[1] ${isExpanded ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
             } md:flex-row md:items-end md:gap-[12px]`}
@@ -232,8 +337,8 @@ const CardNav = ({
                   <a
                     type="button"
                     onClick={(e) => {
-                      e.preventDefault();
-                      lnk.onClick?.();
+                      e.stopPropagation();
+                      handleLinkClick(() => lnk.onClick?.());
                     }}
                     key={`${lnk.label}-${i}`}
                     className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
@@ -249,78 +354,7 @@ const CardNav = ({
           ))}
         </div>
       </nav>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        placement="center"
-        size="lg"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <div className="bg-white rounded-xl p-6 w-[90%] max-w-lg shadow-xl relative">
-
-              {/* Modal Title */}
-              <h2 className="text-xl font-semibold mb-4">
-                Get Started
-              </h2>
-
-              {/* Name Fields */}
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                  <Input label="Email" type="email" />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium">Last Name</label>
-                  <input
-                    type="text"
-                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
-                  />
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="mb-4">
-                <label className="text-sm font-medium">Email</label>
-                <input
-                  type="email"
-                  className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
-                />
-              </div>
-
-              {/* Mobile */}
-              <div className="mb-6">
-                <label className="text-sm font-medium">Mobile Number</label>
-                <input
-                  type="tel"
-                  className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
-                />
-              </div>
-
-              {/* Buttons */}
-              <div className="flex justify-end gap-3">
-                <button
-                  onClick={onClose}
-                  className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
-                >
-                  Close
-                </button>
-
-                <button
-                  className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
-                >
-                  Submit
-                </button>
-              </div>
-
-            </div>
-          )}
-        </ModalContent>
-      </Modal>
-
-
-
-    </div>
+    </div >
   );
 };
 

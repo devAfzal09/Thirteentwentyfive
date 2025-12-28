@@ -3,11 +3,15 @@ import React from "react";
 import {
   MailAdd01Icon,
   AiPhone01Icon,
-  MapsGlobal01Icon
+  MapsGlobal01Icon,
+  Linkedin01Icon,
+  InstagramIcon,
+  TwitterIcon,
+  Share04Icon,
 } from "hugeicons-react";
 
-export default function Contact() {
-   return (
+export default function ContactUs() {
+  return (
     <div className="w-full py-20 bg-[#D8EFFF] mt-8">
       <h1 className="text-center text-4xl font-bold mb-12">
         Reach Us At Anytime
@@ -69,6 +73,50 @@ export default function Contact() {
               >
                 Office Location
               </a>
+            </div>
+          </div>
+          <div className="flex items-center h-[16vh] gap-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100">
+            {/* Icon Box */}
+            <div className="p-4 rounded-xl bg-gray-900 text-white shadow-md">
+              <Share04Icon size={28} />
+            </div>
+
+            {/* Content */}
+            <div className="flex flex-col">
+              <p className="text-gray-600">
+                Follow us on social media to stay updated with insights, news, and product
+                updates.
+              </p>
+
+              {/* Social Icons */}
+              <div className="flex items-center justify-between gap-4 mt-3">
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition"
+                >
+                  <Linkedin01Icon size={34} />
+                </a>
+
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-gray-100 hover:bg-pink-500 hover:text-white transition"
+                >
+                  <InstagramIcon size={34} />
+                </a>
+
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-gray-100 hover:bg-sky-500 hover:text-white transition"
+                >
+                  <TwitterIcon size={34} />
+                </a>
+              </div>
             </div>
           </div>
         </div>

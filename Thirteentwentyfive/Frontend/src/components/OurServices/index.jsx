@@ -9,7 +9,7 @@ export default function OurServices() {
       description: "We create intelligent AI-driven systems that automate processes and scale your business.",
       icon: <ArtificialIntelligence04Icon className="w-12 h-12 text-blue-500" />,
       tag: "AI & ML",
-      bg: "#F9DFDF"
+      bg: "bg-[linear-gradient(120deg,#eff6ff,#dbeafe,#ecfeff,#e9d5ff)]"  
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ export default function OurServices() {
       description: "High-performance websites built with modern frameworks for speed, security, and quality.",
       icon: <AiProgrammingIcon className="w-12 h-12 text-green-500" />,
       tag: "Web Apps",
-      bg: "#CCE5CF"
+      bg: "bg-[linear-gradient(120deg,#e9d5ff,#dcfce7,#f8fafc,#e9d5ff)]"
     },
     {
       id: 3,
@@ -25,7 +25,7 @@ export default function OurServices() {
       description: "Fast, smooth, and user-friendly mobile applications for Android & iOS.",
       icon: <MobileProgramming01Icon className="w-12 h-12 text-purple-500" />,
       tag: "Mobile App",
-      bg: "#ABE0F0"
+      bg: "bg-[linear-gradient(120deg,#eff6ff,#eddcff,#f8fafc,#e9d5ff)]"
     },
     {
       id: 4,
@@ -33,7 +33,7 @@ export default function OurServices() {
       description: "Automate workflows, save time, reduce cost, and improve overall business efficiency.",
       icon: <CloudIcon className="w-12 h-12 text-pink-500" />,
       tag: "Automation",
-      bg: "#F3E8DF"
+      bg: "bg-[linear-gradient(120deg,#dbeafe,#fbcfe8,#f8fafc,#e9d5ff)]"
     },
   ];
 
@@ -47,7 +47,7 @@ export default function OurServices() {
               <div
                 key={item.id}
                 // style={{ backgroundColor: item.bg }}
-                className={`shadow-[0_10px_40px_rgba(0,0,0,0.20)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.30)] transition rounded-2xl p-6 flex flex-col items-center text-center`}
+                className={`${item.bg} shadow-[0_10px_40px_rgba(0,0,0,0.20)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.30)] transition rounded-2xl p-6 flex flex-col items-center text-center`}
               >                
                 <div className="mb-4">{item.icon}</div>
                 
@@ -55,7 +55,7 @@ export default function OurServices() {
                 
                 <p className="text-gray-600 text-sm mb-4">{item.description}</p>
                 
-                <span className="mt-auto px-4 py-1 text-sm rounded-full shadow-md bg-gray-50">
+                <span className="mt-auto px-4 py-1 text-sm rounded-full shadow-md bg-white">
                   {item.tag}
                 </span>
               </div>
