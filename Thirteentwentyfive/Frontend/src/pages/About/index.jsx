@@ -110,7 +110,7 @@ export default function About() {
 
     <div>
       <h4 className="text-lg font-semibold text-blue-600">
-        Krupal Chaudhary
+        Founder Name
       </h4>
       <p className="text-sm text-gray-500">
         Founder & CEO
