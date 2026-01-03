@@ -38,7 +38,8 @@ export default function OurServices() {
   ];
 
   return (
-    <div className="w-full py-20 mb-5 bg-[#D8EFFF]">
+    // bg-[#D8EFFF]
+    <div className="w-full py-20 bg-gray-100 mb-5 ">
       <div className="max-w-6xl mx-auto px-5">
 
         <h2 className="text-4xl font-bold text-center mb-12">Our Services</h2>        
@@ -61,7 +62,6 @@ export default function OurServices() {
               </div>
             ))}
           </div>
-        {/* </AnimatedContent> */}
       </div>
     </div>
   );

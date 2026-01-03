@@ -36,10 +36,7 @@ export default function AboutUs() {
           </h3>
 
           <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6">     
-            At Demaze Technologies, we're more than just developers; we're digital
-            transformation architects. We're a passionate team of 35+ technologists,
-            innovators, and strategic thinkers who believe in the power of AI and
-            cutting-edge technology to reshape businesses.
+            At ThirteenTwentyFive Tech, we don’t just build products — we engineer intelligent systems tailored for your business goals. From AI-driven automation to robust software platforms, we partner with you to transform ideas into real business impact.
             <br /><br />
             Founded with a vision to democratize advanced technology, we bridge the
             gap between complex technical possibilities and real business outcomes.
